@@ -1,38 +1,35 @@
 from nose.tools import *
+from ex49.parser import Sentence
 from ex49 import parser
 
 
+def test_Sentence():
+    sentence_one = Sentence(("noun", "player"),("verb", "eat"), ("noun", "bear"))
+    assert_equal(sentence_one.subject, "player")
+    assert_equal(sentence_one.verb, "eat")
+    assert_equal(sentence_one.object, "bear")
 
 
-def test_verbs():
-    result = parser.scan("eat bear")
-    assert_equal(result, [('noun', 'player'),
-                          ('verb', 'eat'),
-                          ('noun', 'bear')])
+def test_peek():
+    peek_one = [("noun", "player"),("verb", "eat"), ("noun", "bear")]
+    result = parser.peek(peek_one)
 
-    ## The "eat" is made into the (verb,eat) tuple, but
-    ## the program isn't matching the "verb" with line 72
-    ## I don't know why
+    ## **Remember, you need the "parser" before the ".peek" b/c
+    ## you are importing this from another module!!!
 
+    assert_equal(result, "noun")
 
 
 
-# this is a case when you put in just "one word"
-# This case porbably doesn't work b/c of line 78 which
-# needs to equalize the "word" and the 'noun', which can't happen
-# b/c the word is just a word, not a sub, verb, noun, etc
-# IN other words, this info is not given. We need to have it ourselves
-# The only way I can think of this is to have a tuple like I did
-# in ex48
+def test_match():
+    match_one = [("stop", "player"),("verb", "eat"), ("noun", "bear")]
+    result = parser.match(match_one, "stop")
 
 
-# def test_object():
-#     assert_equal
+    assert_equal(result, "stop")
+
+
+# match_one = [("Stop", "drop"), ('Stop', 'drop'), ("woohooo", 'wip pee')]
+# word = match_one.pop(0)
 #
-#
-# def test_subject():
-#     assert_equal(parse_sentence("go"), [('verb', 'go')])
-#     result = lexicon.scan("go kill eat")
-#     assert_equal(result, [('verb', 'go'),
-#                           ('verb', 'kill'),
-#                           ('verb', 'eat')])
+# print word[0]

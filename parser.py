@@ -12,7 +12,6 @@ class Sentence(object):
         self.object = obj[1]
 
 
-
 def peek(word_list):
     if word_list:
         word = word_list[0]
@@ -25,7 +24,7 @@ def match(word_list, expecting):
     if word_list:
         word = word_list.pop(0)
 
-    # list.pop Removes the item at the given position in the list,
+    # list.pop REMOVES the item at the given position in the list,
     # and return it.
 
         if word[0] == expecting:
@@ -83,7 +82,7 @@ def parse_sentence(word_list):
     verb = parse_verb(word_list)
     obj = parse_object(word_list)
 
-    # print subj, verb, obj
+    # print Sentence(subj, verb, obj)
     return Sentence(subj, verb, obj)
 
 # The thing about this is that we have to have a list of two tuples or more
@@ -154,14 +153,21 @@ def scan(stuff):
             word_list.append(('error', 'IAS'))
 
 
-
     return parse_sentence(word_list)
 
 
-scan('north')
+# scan("eat bear")
+
+# x = parse_sentence(word_list)
+
+x = scan("eat bear")
+
+# print x.subject
+# print x.verb
+# print x.object
+
 
 # word_list = [('verb','eat'),('noun', 'food')]
 # This list is supposed to have at least two tuples
 # If not, peek will spit out only one character, instead of
 # a word
-# parse_sentence(word_list)
